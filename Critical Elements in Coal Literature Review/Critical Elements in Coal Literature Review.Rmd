@@ -51,30 +51,73 @@ output:
 ---
 
 
-**Instructional** 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, eval =TRUE, warning = FALSE, message=FALSE)
 
-*Delete this section after you have fully prepared this document*
-
-In your answers to the questions in this literature review please use high quality references (e.g peer reviewed Journal). References can be added to the "mybibfile.bib" within the literature review folder. For example see below a paragraph citing a reference.
-
-"The Fort Cooper Coal Measures and associated stone bands (e.g., tuffaceous clays) have previously been identified as having potential to contain elevated concentrations of rare earth elements (REE) and other ‘strategic’ elements of economic importance [@Hodgkinson2020; @Hodgkinson2021]."
-
-Please note that I have added a considerable number of potentially relevant references to the .bib file; so check the bib file before adding a new reference.
-
-
+library(gt)
+library(tidyverse)
+library(gtExtras)
+```
 
 
 # Critical elements overview
 
 Answer the following question: 
 
+
 1. What are critical elements (also referred to as critical minerals including rare earth elements)? What are they used for and what is their projected demand?
 
-In your answer, in addition to global references and demand, also try to focus on their importance within Australia (there has been a lot of press and recently announced funding for exploration). 
+As the burgeoning ideology of  environmental sustainability and geopolitical tension, The concept of critical elements received paramount attentions in the contemporary global landscape. Critical elements, or also referred as critical minerals, is vital  metallic or non-metallic element that underpin the functionality and advancement of core technologies, economic frameworks, and national security but may be susceptible for exogenous risk in supply chain. 
 
-You can use [Geoscience Australia](https://www.ga.gov.au/scientific-topics/minerals/critical-minerals) to get a broad overview, but I expect that you will provide 'proper' peer reviewed Journal articles in your answer.
+According to [Critical Minerals Strategy 2023–2030](https://www.industry.gov.au/publications/critical-minerals-strategy-2023-2030) issued by Geoscience Australia,There has total 15 elements are listed as top vulnerability for the future:
 
-Consider using a table to summarize the results; for example listing the Element, its uses and demand, and source of citation in a table format.
+
+           
+```{r}
+table1<-tibble("Critical element"=c("Aluminum & derivative(Al)","Cobalt(Co)","Gallium(Ga)","Germanium(Ge)",
+                            "Lithium(Li)","Magnesium(Mg)","Manganese(Mn)", "Nickel(Ni)","Rare-earth elements(REE)", "Silicon(Si)", "Tantalum(Ta)", "Titanium(Ti)","Tungsten(W)","Vanadium(V)","Zirconium(Zr)"),
+               "Production(Kt)"=c(20,5.9,"-","-",61,2.6,3.3,150,18,0.05,0.057,0.85,"-","-",0.5),
+               "% of Global production" =c("14%","3%","-","-","47%","10%","17%","4.5%","6%","1%","3%","8.4%","-","-","36%"),
+    "Ore reserve(Kt)"=c("1,160",613,"-","-","4,563"," Not available","120,000",20.4,"3,121","-",49.8,"82,100",213,"2,948","29,200"),
+  "Usage"=c("Aerospace sector and coating in Li-ion batteries","Li-ion battery cathodes,superalloys, steel, and magnets","ICs, GaN laser diodes and photovoltaics films","Fiber/infared optics,Polymerization Catalysts and semiconductors","Li-ion batteries and Lithium carbonate and lithium oxide in glass or ceramics","Pyrotechnics, medicine and nanocomposites in automotive/aerospace","Steel,Agricultral fertiliser and dry cell batteries", "Non-ferrous alloys,magnets and electroplating","Catalyst,magnets and polishing","Silicon wafer in electronic & photovoltaic cells and synthetic polymers", "Micro-capacitors and medical technology", "Aerospace and marine application or pigment through Titanium dioxide","Lightning and chemical compunds","Steel alloys","Cladding fuel rods in nuclear reactors")
+    
+    )
+                                           
+REE<- table1 |> filter(`Critical element`=="Rare-earth elements(REE)")|>
+  pull(`Critical element`)
+
+table1 |>gt()|> cols_align(
+    align = "center" ) |>  
+  gt_theme_538() |>
+  tab_source_note(
+    source_note = md(
+      "Source: Skirrow et al., 2013 & Sinclair et al.,2024 "
+    )
+  ) |>  tab_footnote(
+    footnote = md("17 elements, including lanthanoid,Scandium(Sc) and Yttrium(Y)."),
+    locations = cells_body(
+      columns = `Critical element`,
+      rows=`Critical element`== REE
+    )
+  ) |> 
+    tab_footnote(
+    footnote = md("data collected in 2012."),
+    locations = cells_body(
+      columns = names(table1)[4],
+      rows=`Ore reserve(Kt)`==20.4
+    )
+  ) |>
+  tab_header(title = "Table 1: summary of crtical element in Australia") 
+```
+
+
+
+
+Rare-earth elements,a significant branch in critical element, comprise of 15 element in lanthanoid family and 2 extra elements with similar chemical properties--Scandium(Sc) and Yttrium(Y). Unlike name implication, albeit their overall natural abundance(NA) in earth crust is not extremely rare (average 180-200 ppm) their distribution in earth is quite scattered and strong  propensity to coexist in pairs or group within ore deposits in terms of geochemical properties. Therefore, only few REE can be concentrated to a degree that permits for commercial mining. 
+
+With the exuberant demand shock from EVs and clean energy exploration, the consumption of critical minerals is foreseeable to be thrived: Geoscience Australia estimates that by 2040, critical elements related to lithium batteries (such as Li, Co, and Ni) will see an exponential surge of 20 to 40 times, while REEs (rare earth elements) will see a 7-fold increase during the same period.
+
+
 
 
 # Critical elements in coal
@@ -83,7 +126,84 @@ Answer the following question:
 
 2. What types of critical elements are found in coal, and in what concentrations?
 
-For good background info relevant to Australia please start with the ACARP report (C29030) by @Hodgkinson2021. Also, in our data analysis we will be focusing on determining PAAS values - make sure you know what this means and how to calculate this - it is fully explained in  @Hodgkinson2021.
+In an ideal state, any chemical elements can be detected in coal deposit, which may originate from syn-genetic plant decays or epigenetic source after . Its concentration will be determined on coalified compaction and the heat & pressure environment.
+
+
+
+In Hodginkson et al., 2021 element mapping  project on Bowen basin,the largest coal reserves in Australia, the concentration of element  composition is subjective to sample's lithology rather than the depth grading:
+
+
+1). In coal and derivative,  albeit majority of element concentrations is inferior of the benchmark against earth crust average, local  samples exhibit  enrichment in HREE and Scandium in respect to Post-Archaean Australian Shales (PAAS) standard, while abnormal 4-6 times higher than crustal average in moderate  critical element, Bismuth(Bi) .
+
+2). Siltstone and mudstone has a lackluster finding to classify enrichment for majority of elements concentration,except for  the concentration of Cobalt compound barely meet crustal average,  whose ubiquitous economic value may warrant further examination.
+
+3).  As the sediment from volcanic ash, tuffaceous rock is rich in pumice and lithic fragments. The sample display a series of  elevated concentrations of  strategic elements including REE, Ga and Bi. Besides, a potential Lithium-rich borehole is found, with approximate 5 times higher than crustal average.
+
+Below is the summary result from  the distribution of critical element :
+
+```{r}
+table2_c<-tibble("Critical element"=c("Lithium","REE","Cobalt","Nickel","Tantalum","Vanadium","Zirconium","Gallium","Bismuth"),
+       "Crust"=c(21,184,17,47,1,97, 193,17,0.2),
+       "Average concentration(ppm)"= c(13.7,115.8,16.9,11.2,0.33,85.6,102.1,12.3,0.59),
+       "Higest concentration(ppm)"=c(25,205,30,40,1,140,160,25,1),
+                                     
+       "% of above crustal average"=c(2/9,1/9,4/9,0,1/3,2/9,0,4/9,2/3),
+       "Type"=rep("Coal& associate",9)
+       )
+
+
+
+table2_sm<-tibble(
+  "Critical element"=c("Lithium","REE","Cobalt","Nickel","Tantalum","Vanadium","Zirconium","Gallium","Bismuth"),
+       "Crust"=c(21,184,17,47,1,97,193, 17,0.2),
+  "Average concentration(ppm)"= c(17.2,138.8,39.3,25.8,0.2,102,116.8,15,0.18),
+       "Higest concentration(ppm)"=c(28,189,134,73,1,225,243,22,0.4),
+                                     
+       "% of above crustal average"=c(1/3,1/6,2/3,1/3,1/6,1/3,1/6,1/3,2/3),
+       "Type"=rep("Siltstone & mudstone",9)
+)
+
+
+table2_tf<-tibble(
+  "Critical element"=c("Lithium","REE","Cobalt","Nickel","Tantalum","Vanadium","Zirconium","Gallium","Bismuth"),
+       "Crust"=c(21,184,17,47,1,97,193, 17,0.2),
+  "Average concentration(ppm)"= c(21.5,244,9.25,3.75,1.1,27.9,153.75,32.25,0.71),
+       "Higest concentration(ppm)"=c(105,441,19,30,2,70,282,37,1.2),
+                                     
+       "% of above crustal average"=c(1/8,7/8,1/8,0,1,0,1/4,1,1),
+       "Type"=rep("Tuffaceous rocks",9)
+)
+
+table2_bind<-rbind(table2_c,table2_sm,table2_tf)
+table2_bind |> 
+  group_by(Type) |>
+  gt()|>
+  cols_align(align = "center" ) |>  
+  gt_theme_538() |> 
+  fmt_percent("% of above crustal average",
+                                decimals=2) |> 
+  tab_header(title = "Table 2: summary of Hodginkson et al., 2021  sampling mapping result  for Bowen basin's sample")|>
+   tab_style(
+    style = cell_text(weight = "bold"),
+    locations = cells_body(
+      columns = "Average concentration(ppm)",
+      rows=`Average concentration(ppm)`>= Crust
+    )
+  )|>
+  tab_source_note(
+    source_note = md(
+      "Source: Hodginkson et al., 2021"
+    )
+  )  |> tab_footnote(
+    footnote = " McLennan 2011  Post-Archean
+Australian Shale standard ",
+    locations = cells_column_labels(columns = Crust)
+  )
+
+```
+
+
+
 
 
 # Economic concentrations
