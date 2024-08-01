@@ -215,8 +215,9 @@ Answer the following question:
 The booming demand for critical element, has not merely driven interest in alternative sources beyond traditional mining but also stimulate the exploration of operational feasibility from an economic value perspective. Economic  assessment is hinged with the priority concern on concentrations, as well as demand-supply dynamic and operational cost.@usde2017
 
 In general, @Seredin2012 study for the coal mining in Far east region, Russia manifest the cut-off  criterion for REE extraction will range from 800-1000 ppm, subject to seam thickness of the coal. However, the primitive cut-off grading does not correct reflect market trend on each individual composition. The new outlook coefficient is introduced to lever the economic degree of rarity for REY oxide(REO). Elements with plentiful deposits or relatively narrow application markets will be graded as 'Excessive', vice versa to be graded as 'Vital'. The ratio formula can be written as:
-$$ \begin{equation}\tag{1} C_{Outlook}=\frac{\sum{C_{Vital}}}{\sum{C_{Excessive}}} \end{equation} $$
-$$ \begin{equation}\tag{2} C_{\text{Critical percent}}=\frac{\sum{C_{Vital}}}{\sum{C_{REE}}} \end{equation} $$
+
+$$ \tag{1} C_{Outlook}=\frac{\sum{C_{Vital}}}{\sum{C_{Excessive}}}  $$
+$$ \tag{2} C_{\text{Critical percent}}=\frac{\sum{C_{Vital}}}{\sum{C_{REE}}} $$
 
 
 ```{r}
@@ -246,7 +247,7 @@ table3 |>gt()|>
 ```
 
 
- Ketris and Yudovich (2009) research measured average trace REE concentration globally at 403.5 ppm, with an approximately 1 outlook coefficient and 35% $C_{\text{Critical percent}$. Continual research by Choudhary et al analyzed approximately 288 coal,fly ash samples, reporting 11 of 13 nations has been detected above-average case, especially  notably enrichment in China, Russia and Central Asia.
+ Ketris and Yudovich (2009) research measured average trace REE concentration globally at 403.5 ppm, with an approximately 1 outlook coefficient and 35% $C_{\text{Critical percent}}$. Continual research by Choudhary et al analyzed approximately 288 coal,fly ash samples, reporting 11 of 13 nations has been detected above-average case, especially  notably enrichment in China, Russia and Central Asia.
 
 
 Furthermore, Dai and  Finkelman (2018) also compiled the cut-off grade for key elements in coal.
