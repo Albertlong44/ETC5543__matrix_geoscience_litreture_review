@@ -73,7 +73,7 @@ According to [Critical Minerals Strategy 2023–2030](https://www.industry.gov.a
 
 
            
-```{r}
+```{r table1 }
 table1<-tibble("Critical element"=c("Aluminum & derivative(Al)","Cobalt(Co)","Gallium(Ga)","Germanium(Ge)",
                             "Lithium(Li)","Magnesium(Mg)","Manganese(Mn)", "Nickel(Ni)","Rare-earth elements(REE)", "Silicon(Si)", "Tantalum(Ta)", "Titanium(Ti)","Tungsten(W)","Vanadium(V)","Zirconium(Zr)"),
                "Production(Kt)"=c(20,5.9,"-","-",61,2.6,3.3,150,18,0.05,0.057,0.85,"-","-",0.5),
@@ -91,7 +91,7 @@ table1 |>gt()|> cols_align(
   gt_theme_538() |>
   tab_source_note(
     source_note = md(
-      "Source: Coyne et al.,2023 & Skirrow et al., 2013 "
+      "Source: Skirrow et al., 2013 & Sinclair et al.,2024 "
     )
   ) |>  tab_footnote(
     footnote = md("17 elements, including lanthanoid,Scandium(Sc) and Yttrium(Y)."),
@@ -107,9 +107,13 @@ table1 |>gt()|> cols_align(
       rows=`Ore reserve(Kt)`==20.4
     )
   ) |>
-  tab_header(title = "Table 1: summary of crtical element in Australia") 
-```
+  tab_header(title = "Table 1: summary of crtical element in Australia") |>
+  cols_width(everything() ~ px(100))|>
+  tab_options(
+    table.font.size = px(10)# Adjust the font size
+  )
 
+```
 
 
 
@@ -141,7 +145,8 @@ In Hodginkson et al., 2021 element mapping  project on Bowen basin,the largest c
 
 Below is the summary result from  the distribution of critical element :
 
-```{r}
+
+```{r table2}
 table2_c<-tibble("Critical element"=c("Lithium","REE","Cobalt","Nickel","Tantalum","Vanadium","Zirconium","Gallium","Bismuth"),
        "Crust"=c(21,184,17,47,1,97, 193,17,0.2),
        "Average concentration(ppm)"= c(13.7,115.8,16.9,11.2,0.33,85.6,102.1,12.3,0.59),
@@ -177,9 +182,9 @@ table2_tf<-tibble(
 table2_bind<-rbind(table2_c,table2_sm,table2_tf)
 table2_bind |> 
   group_by(Type) |>
-  gt()|>
-  cols_align(align = "center" ) |>  
-  gt_theme_538() |> 
+  gt()|>  
+  gt_theme_538() |>
+  cols_align(align = "center" )|> 
   fmt_percent("% of above crustal average",
                                 decimals=2) |> 
   tab_header(title = "Table 2: summary of Hodginkson et al., 2021  sampling mapping result  for Bowen basin's sample")|>
@@ -198,12 +203,14 @@ table2_bind |>
     footnote = " McLennan 2011  Post-Archean
 Australian Shale standard ",
     locations = cells_column_labels(columns = Crust)
+  )|>
+  tab_header(title = "Table 2: summary of crtical element in Australia") |>
+  cols_width(everything() ~ px(100))|>
+  tab_options(
+    table.font.size = px(10)# Adjust the font size
   )
 
 ```
-
-
-
 
 
 # Economic concentrations
@@ -219,8 +226,7 @@ In general, @Seredin2012 study for the coal mining in Far east region, Russia ma
 $$ \tag{1} C_{Outlook}=\frac{\sum{C_{Vital}}}{\sum{C_{Excessive}}}  $$
 $$ \tag{2} C_{\text{Critical percent}}=\frac{\sum{C_{Vital}}}{\sum{C_{REE}}} $$
 
-
-```{r}
+```{r table4}
 table3<-tibble("REE"= c("Scandium(Sc)","Yttrium(Y)", "Lanthanum (La)", "Cerium (Ce)", "Praseodymium (Pr)", "Neodymium (Nd)", "Promethium (Pm)", "Samarium (Sm)", "Europium (Eu)", "Gadolinium (Gd)", "Terbium (Tb)", "Dysprosium (Dy)", "Holmium (Ho)", "Erbium (Er)", "Thulium (Tm)", "Ytterbium (Yb)", "Lutetium (Lu)"),
    "Category"= c("-", "M", "L","L","L","L","-","L","M","M","M","M","H","H","H","H","H"),
    "Significance"=c("-","Vital","Moderate","Excessive","Moderate","Vital",
@@ -243,7 +249,12 @@ table3 |>gt()|>
     source_note = md(
       "Source: Seredin et al., 2012"
     )
-  ) 
+  ) |>
+  tab_header(title = "Table 3: summary of crtical element in Australia") |>
+  cols_width(everything() ~ px(100))|>
+  tab_options(
+    table.font.size = px(10)# Adjust the font size
+  )
 ```
 
 
@@ -252,7 +263,7 @@ table3 |>gt()|>
 
 Furthermore, Dai and  Finkelman (2018) also compiled the cut-off grade for key elements in coal.
 
-```{r}
+```{r table4}
 table4<-tibble("Element"= c("Uranium(U)","Germanium(Ge)*","Vanadium(V)*","Scandium(Sc)*","Selenium(Se)", "Niobium(Nb)", "Zirconium(Zr)*","Molybdenum(Mo)","Rhenium(Re)","Tungsten(W)*","Antimony(Sb)","Beryllium(Be)"),
 "Cut-off grade"= c(1000,300,1000,100,"500-800", 300,2000,1000,1,1000,100,300)
    )
@@ -274,7 +285,12 @@ table4 |>gt()|>
     source_note = md(
       "Source: Dai et al., 2018"
     )
-  ) 
+  ) |>
+  tab_header(title = "Table 4: summary of crtical element in Australia") |>
+  cols_width(everything() ~ px(100))|>
+  tab_options(
+    table.font.size = px(10)# Adjust the font size
+  )
 ```
 # Existing economic deposits
 
